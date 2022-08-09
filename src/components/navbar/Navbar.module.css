@@ -1,0 +1,15 @@
+.navigation-container {
+    background-color: #3A4D7C;
+}
+
+
+.nav-link {
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: lightgray;
+}
+

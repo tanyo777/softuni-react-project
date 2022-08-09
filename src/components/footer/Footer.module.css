@@ -1,0 +1,21 @@
+footer {
+    background-color: #1E3161;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+section {
+    width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.rights-info {
+    margin-top: 50px;
+    color: #7896e2;
+
+}
