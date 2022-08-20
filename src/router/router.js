@@ -5,6 +5,9 @@ import Home from "../components/home/Home";
 import Dashboard from "../components/dashboard/Dashboard";
 import NotFound from "../components/404/404";
 import ProtectedRoute from "../common/ProtectedRoute";
+import Cars from "../components/cars/Cars";
+import CarDetails from "../components/cars/Details";
+import CreateCarComponent from "../components/cars/CreateCar";
 
 const ApplicationRouter = () => {
   const routes = useRoutes([
@@ -16,6 +19,30 @@ const ApplicationRouter = () => {
       element: (
         <ProtectedRoute>
           <Dashboard />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/cars",
+      element: (
+        <ProtectedRoute>
+          <Cars />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/cars/:id",
+      element: (
+        <ProtectedRoute>
+          <CarDetails />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/cars/create",
+      element: (
+        <ProtectedRoute>
+          <CreateCarComponent />
         </ProtectedRoute>
       ),
     },

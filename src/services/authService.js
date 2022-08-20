@@ -16,4 +16,20 @@ export const registerHandler = (payload) => {
   });
 };
 
-export const logout = () => {};
+export const getUser = (accessToken) => {
+  return fetch(baseUrl + '/users/me', {
+    headers: {
+      'X-Authorization': accessToken
+    },
+    "Content-Type": "application/json"
+  })
+};
+
+export const logout = (accessToken) => {
+  return fetch(baseUrl + '/users/logout', {
+    headers: {
+      'X-Authorization': accessToken
+    },
+    "Content-Type": "application/json"
+  })
+};
