@@ -8,6 +8,7 @@ import ProtectedRoute from "../common/ProtectedRoute";
 import Cars from "../components/cars/Cars";
 import CarDetails from "../components/cars/Details";
 import CreateCarComponent from "../components/cars/CreateCar";
+import EditCar from "../components/cars/EditCar";
 
 const ApplicationRouter = () => {
   const routes = useRoutes([
@@ -43,6 +44,14 @@ const ApplicationRouter = () => {
       element: (
         <ProtectedRoute>
           <CreateCarComponent />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/cars/edit/:id",
+      element: (
+        <ProtectedRoute>
+          <EditCar />
         </ProtectedRoute>
       ),
     },
