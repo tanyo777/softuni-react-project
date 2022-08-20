@@ -23,7 +23,7 @@ const Dashboard = () => {
   return (
     <>
       <ProtectedNavigation />
-      <main className={styles.main}>
+      <main className={styles.dashboard}>
         {isLoading ? (
           <CircularLoader />
         ) : (

@@ -3,7 +3,7 @@ import styles from "./DetailsContent.module.css";
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import { deleteCar } from "../../services/carService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CircularLoader from "../loaders/CircularLoader";
 
 const CarDetailsContent = (props) => {
@@ -44,7 +44,7 @@ const CarDetailsContent = (props) => {
                 Delete
               </Button>
               <Button variant="contained" style={{ marginLeft: "20px" }}>
-                Edit
+                <Link to={"/cars/edit/" + props._id} style={{ color: "white", textDecoration: "none"}}>Edit</Link>
               </Button>
             </div>
           )}

@@ -50,3 +50,20 @@ export const deleteCar = async (carId, accessToken) => {
         return jsonData;
       }
 };
+
+export const editCar = async (carId, carData, accessToken) => {
+  const response = await fetch(baseUrl + "/" + carId, {
+    headers: {
+        "X-Authorization": accessToken
+    },
+    method: "PUT",
+    "Content-Type": "application/json",
+    body: JSON.stringify(carData)
+  });
+  const jsonData = await response.json();
+  if (response.status === 200) {
+    return jsonData;
+  } else {
+    return jsonData;
+  }
+};
