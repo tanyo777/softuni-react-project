@@ -28,7 +28,7 @@ const CarDetailsContent = (props) => {
         <>
           <h1>Car Info</h1>
           <h5>
-            Brand: {props.brand}, ({props.year})
+            Brand: {props.brand} ({props.year})
           </h5>
           <h5>Model: {props.model}</h5>
           <h6>Price: {props.price}$</h6>
