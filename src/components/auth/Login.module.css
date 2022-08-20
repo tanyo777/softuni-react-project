@@ -1,3 +1,25 @@
 main {
     height: calc(100vh - 330px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: space;
+    flex-direction: column;
+    width: 400px;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 9px gray;
+}
+
+
+@media screen and (max-width: 500px) {
+    form {
+        width: 85%;
+    }
 }
