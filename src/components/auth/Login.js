@@ -5,13 +5,15 @@ import ErrorMessage from "./ErrorMessage";
 import { login } from "../../services/authService";
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import AlertComponent from "../../common/Alert";
+import Navigation from "../navbars/Navbar";
+import Footer from '../footer/Footer';
 
 const Login = () => {
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
-  const [error, setError] = useState({ error: false, message: ""});
+  const [error, setError] = useState({ error: false, message: "" });
 
   const {
     register,
@@ -31,33 +33,48 @@ const Login = () => {
   };
 
   return (
-    <main className={styles.main}>
-      <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-        <h1>Login</h1>
-        <TextField
-          id="outlined-textarea"
-          label="Username"
-          placeholder="Enter username..."
-          multiline
-          {...register("username", { required: true })}
-        />
-        {errors.username && <ErrorMessage message="Username is required..." />}
+    <>
+      <Navigation />
+      <main className={styles.main}>
+        <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
+          <h1>Login</h1>
+          <TextField
+            id="outlined-textarea"
+            label="Username"
+            placeholder="Enter username..."
+            multiline
+            margin="dense"
+            {...register("username", { required: true })}
+          />
+          {errors.username && (
+            <ErrorMessage message="Username is required..." />
+          )}
 
-        <TextField
-          id="outlined-textarea"
-          label="Password"
-          placeholder="Enter password..."
-          multiline
-          {...register("password", { required: true })}
-        />
-        {errors.password && <ErrorMessage message="Password is required" />}
+          <TextField
+            id="outlined-textarea"
+            label="Password"
+            placeholder="Enter password..."
+            multiline
+            margin="dense"
+            {...register("password", { required: true })}
+          />
+          {errors.password && <ErrorMessage message="Password is required" />}
 
-        <Button variant="contained" type="submit">
-          Login
-        </Button>
-      </form>
-      {error.error === true ? <AlertComponent message={error.message} expirationHandler={setError}/> : ""}
-    </main>
+          <Button variant="contained" type="submit">
+            Login
+          </Button>
+        </form>
+        {error.error === true ? (
+          <AlertComponent
+            message={error.message}
+            expirationHandler={setError}
+          />
+        ) : (
+          ""
+        )}
+      </main>
+      <Footer />
+    </>
   );
 };
 

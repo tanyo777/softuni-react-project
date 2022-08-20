@@ -7,12 +7,13 @@ import { UserContext } from "../../context/userContext";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AlertComponent from "../../common/Alert";
+import Navigation from "../navbars/Navbar";
+import Footer from "../footer/Footer";
 
 const Register = () => {
-
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
-  const [error, setError] = useState({ error: false, message: ""});
+  const [error, setError] = useState({ error: false, message: "" });
 
   const {
     register,
@@ -23,7 +24,7 @@ const Register = () => {
   const submitHandler = async (payload) => {
     const response = await registerHandler(payload);
     const jsonResponse = await response.json();
-    if(jsonResponse.accessToken) {
+    if (jsonResponse.accessToken) {
       userContext.setUser(jsonResponse);
       navigate("/dashboard");
     } else {
@@ -32,52 +33,66 @@ const Register = () => {
   };
 
   return (
-    <main className={styles.main}>
-      <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
-        <h1>Register</h1>
-        <TextField
-          id="outlined-textarea"
-          label="Username"
-          placeholder="Enter username..."
-          multiline
-          {...register("username", { required: true })}
-        />
-        {errors.email && <ErrorMessage message="Email is required..." />}
+    <>
+      <Navigation />
+      <main className={styles.main}>
+        <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
+          <h1>Register</h1>
+          <TextField
+            id="outlined-textarea"
+            label="Username"
+            placeholder="Enter username..."
+            multiline
+            margin="dense"
+            {...register("username", { required: true })}
+          />
+          {errors.email && <ErrorMessage message="Email is required..." />}
 
-        <TextField
-          id="outlined-textarea"
-          label="Email"
-          placeholder="Enter email..."
-          multiline
-          {...register("email", { required: true })}
-        />
-        {errors.email && <ErrorMessage message="Email is required..." />}
+          <TextField
+            id="outlined-textarea"
+            label="Email"
+            placeholder="Enter email..."
+            multiline
+            margin="normal"
+            {...register("email", { required: true })}
+          />
+          {errors.email && <ErrorMessage message="Email is required..." />}
 
+          <TextField
+            id="outlined-textarea"
+            label="Password"
+            placeholder="Enter password..."
+            multiline
+            margin="normal"
+            {...register("password", { required: true })}
+          />
+          {errors.password && <ErrorMessage message="Password is required" />}
 
-        <TextField
-          id="outlined-textarea"
-          label="Password"
-          placeholder="Enter password..."
-          multiline
-          {...register("password", { required: true })}
-        />
-        {errors.password && <ErrorMessage message="Password is required" />}
+          <TextField
+            id="outlined-textarea"
+            label="Password"
+            placeholder="Enter password..."
+            multiline
+            margin="normal"
+            {...register("rePassword", { required: true })}
+          />
+          {errors.password && <ErrorMessage message="Passwords don't match" />}
 
-        <TextField
-          id="outlined-textarea"
-          label="Password"
-          placeholder="Enter password..."
-          multiline
-          {...register("rePassword", { required: true })}
-        />
-        {errors.password && <ErrorMessage message="Passwords don't match" />}
-
-        <Button variant="contained" type="submit">
-          Register
-        </Button>
-      </form>
-      {error.error === true ? <AlertComponent message={error.message} expirationHandler={setError}/> : ""}
-    </main>
+          <Button variant="contained" type="submit">
+            Register
+          </Button>
+        </form>
+        {error.error === true ? (
+          <AlertComponent
+            message={error.message}
+            expirationHandler={setError}
+          />
+        ) : (
+          ""
+        )}
+      </main>
+      <Footer />
+    </>
   );
 };
 
