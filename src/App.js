@@ -1,14 +1,17 @@
 import Navigation from "./components/navbar/Navbar";
 import ApplicationRouter from "./router/router";
-import Footer from './components/footer/Footer';
+import Footer from "./components/footer/Footer";
+import UserProvider from "./context/userContext";
 
 function App() {
   return (
-    <div>
-      <Navigation />
-      <ApplicationRouter />
-      <Footer />
-    </div>
+    <>
+      <UserProvider>
+        <Navigation />
+        <ApplicationRouter />
+        <Footer />
+      </UserProvider>
+    </>
   );
 }
 
