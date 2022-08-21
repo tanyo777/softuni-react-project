@@ -2,8 +2,7 @@ import { TextField, Button } from "@mui/material";
 import ErrorMessage from "../auth/ErrorMessage";
 import CircularLoader from "../loaders/CircularLoader";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext, memo } from "react";
 import { UserContext } from "../../context/userContext";
 import { editCar } from "../../services/carService";
 import { useNavigate } from "react-router-dom";
@@ -123,4 +122,4 @@ const EditCarContent = (props) => {
   );
 };
 
-export default EditCarContent;
+export default memo(EditCarContent);

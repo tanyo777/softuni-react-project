@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import styles from "./DetailsContent.module.css";
-import { useContext, useState } from "react";
+import { useContext, useState, memo } from "react";
 import { UserContext } from "../../context/userContext";
 import { deleteCar } from "../../services/carService";
 import { Link, useNavigate } from "react-router-dom";
@@ -73,4 +73,4 @@ const CarDetailsContent = (props) => {
   );
 };
 
-export default CarDetailsContent;
+export default memo(CarDetailsContent);
