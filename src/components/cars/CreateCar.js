@@ -30,7 +30,7 @@ const CreateCarComponent = () => {
     if (response._id) {
       navigate("/cars/" + response._id);
     } else {
-      // show error message from the server
+      setError({ error: true, message: response.message });
     }
   };
 

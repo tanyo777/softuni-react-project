@@ -7,26 +7,30 @@ import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import { editCar } from "../../services/carService";
 import { useNavigate } from "react-router-dom";
+import AlertComponent from "../../common/Alert";
 
 const EditCarContent = (props) => {
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
-
-  console.log(props);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const [error, setError] = useState({ error: false, message: "" });
   const [isLoading, setIsLoading] = useState(false);
 
   const editCarHandler = (payload) => {
     setIsLoading(true);
-    editCar(props._id,payload, userContext.user.accessToken).then((res) => {
+    editCar(props._id, payload, userContext.user.accessToken).then((res) => {
+      if (!res._id) {
         setIsLoading(false);
-        navigate('/cars/' + res._id);
+        setError({ error: true, message: "Cannot edit this post!" });
+      } else {
+        setIsLoading(false);
+        navigate("/cars/" + res._id);
+      }
     });
   };
 
@@ -108,6 +112,11 @@ const EditCarContent = (props) => {
             Edit
           </Button>
         </form>
+      )}
+      {error.error === true ? (
+        <AlertComponent message={error.message} expirationHandler={setError} />
+      ) : (
+        ""
       )}
       {isLoading && <CircularLoader />}
     </>

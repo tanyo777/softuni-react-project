@@ -5,18 +5,24 @@ import { UserContext } from "../../context/userContext";
 import { deleteCar } from "../../services/carService";
 import { Link, useNavigate } from "react-router-dom";
 import CircularLoader from "../loaders/CircularLoader";
+import AlertComponent from "../../common/Alert";
 
 const CarDetailsContent = (props) => {
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({ error: false, message: "" });
 
   const deleteHandler = () => {
     setIsLoading(true);
     if (props._ownerId === userContext.user._id) {
-      deleteCar(props._id, userContext.user.accessToken).then(() => {
+      deleteCar(props._id, userContext.user.accessToken).then((res) => {
         setIsLoading(false);
-        navigate("/cars");
+        if (res._deletedOn) {
+          navigate("/cars");
+        } else {
+          setError({ error: true, message: "Cannot delete this post!" });
+        }
       });
     }
   };
@@ -44,9 +50,22 @@ const CarDetailsContent = (props) => {
                 Delete
               </Button>
               <Button variant="contained" style={{ marginLeft: "20px" }}>
-                <Link to={"/cars/edit/" + props._id} style={{ color: "white", textDecoration: "none"}}>Edit</Link>
+                <Link
+                  to={"/cars/edit/" + props._id}
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  Edit
+                </Link>
               </Button>
             </div>
+          )}
+          {error.error === true ? (
+            <AlertComponent
+              message={error.message}
+              expirationHandler={setError}
+            />
+          ) : (
+            ""
           )}
         </>
       )}
