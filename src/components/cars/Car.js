@@ -4,11 +4,6 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 const Car = (props) => {
-
-    useEffect(() => {
-        console.log(props);
-    }, []);
-
   return (
     <div className={styles["car-container"]}>
       <h4>{props.brand} ({props.year})</h4>

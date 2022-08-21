@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import AlertComponent from "../../common/Alert";
 import Navigation from "../navbars/Navbar";
 import Footer from "../footer/Footer";
+import validator from "validator";
 
 const Register = () => {
   const userContext = useContext(UserContext);
@@ -22,6 +23,16 @@ const Register = () => {
   } = useForm();
 
   const submitHandler = async (payload) => {
+    if (!validator.isEmail(payload.email)) {
+      setError({ error: true, message: "Invalid email" });
+      return;
+    }
+
+    if (payload.password !== payload.rePassword) {
+      setError({ error: true, message: "Passwords don't match" });
+      return;
+    }
+
     const response = await registerHandler(payload);
     const jsonResponse = await response.json();
     if (jsonResponse.accessToken) {
@@ -62,8 +73,9 @@ const Register = () => {
             id="outlined-textarea"
             label="Password"
             placeholder="Enter password..."
-            multiline
-            margin="normal"
+            margin="dense"
+            autoComplete="current-password"
+            type="password"
             {...register("password", { required: true })}
           />
           {errors.password && <ErrorMessage message="Password is required" />}
@@ -72,11 +84,14 @@ const Register = () => {
             id="outlined-textarea"
             label="Password"
             placeholder="Enter password..."
-            multiline
             margin="normal"
+            type="password"
+            autoComplete="current-password"
             {...register("rePassword", { required: true })}
           />
-          {errors.password && <ErrorMessage message="Passwords don't match" />}
+          {errors.rePassword && (
+            <ErrorMessage message="Password confirmation is required" />
+          )}
 
           <Button variant="contained" type="submit">
             Register

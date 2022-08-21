@@ -8,7 +8,7 @@ import { UserContext } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 import AlertComponent from "../../common/Alert";
 import Navigation from "../navbars/Navbar";
-import Footer from '../footer/Footer';
+import Footer from "../footer/Footer";
 
 const Login = () => {
   const userContext = useContext(UserContext);
@@ -54,12 +54,12 @@ const Login = () => {
             id="outlined-textarea"
             label="Password"
             placeholder="Enter password..."
-            multiline
             margin="dense"
+            type="password"
+            autoComplete="current-password"
             {...register("password", { required: true })}
           />
           {errors.password && <ErrorMessage message="Password is required" />}
-
           <Button variant="contained" type="submit">
             Login
           </Button>
